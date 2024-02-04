@@ -1,0 +1,6 @@
+name = input("Your name? ")
+email = input("Your email? ")
+age = int(input("Your age? "))
+height = float(input("Your height? "))
+is_active = bool(input("is_active "))
+print (f"Your name {name},your age {age}, your email {email}, your height {height}, active {is_active}")
