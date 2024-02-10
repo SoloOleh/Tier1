@@ -1,0 +1,5 @@
+is_active = input("Is the user active? ") == "1"
+is_admin = input("Is the user administrator? ") == "1"
+is_permission = input("Does the user have access? ") == "1"
+access = is_admin or (is_permission and is_active)
+print (f"access {access}")
