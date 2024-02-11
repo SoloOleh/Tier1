@@ -31,3 +31,11 @@
 # js = lang.get("JS", 1995)  # 1995
 # pascal = lang.get("Pascal")  # None
 # print(lang)
+
+def get_grade(key):
+    grade = {'A': 5, 'B': 5, 'C': 4, 'D': 3, 'E': 3, 'FX': 2, 'F': 1}
+    return grade.get(key)
+
+def get_description(key):
+    description = {'A': 'Perfectly', 'B': 'Very good', 'C': 'Good', 'D': 'Satisfactorily', 'E': 'Enough', 'FX': 'Unsatisfactorily', 'F': 'Unsatisfactorily'}
+    return description.get(key)
