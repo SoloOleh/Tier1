@@ -1,10 +1,7 @@
-mybirthday = '3.4.1981'
-print (mybirthday.split('.'))
+mybirthday = '3/4/1981'
+mybirthday.split('/')
+print (mybirthday)
 
-planets = ['Mercury', 'Jupiter', 'Earth', 'Mars', 'Venus']
-print(', '.join(planets))
-
-print (planets.index('Earth'))
 
 
 

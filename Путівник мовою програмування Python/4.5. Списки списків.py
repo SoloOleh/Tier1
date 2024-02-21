@@ -1,0 +1,7 @@
+text_editors = ['Atom', 'Sublime Text']
+programming_language = ['Python', 'C', 'JavaScript']
+programmers = ['Guido van Rossum', 'Dennis Ritchie', 'Brendan Eich']
+all_info = [text_editors, 'code', programming_language, programmers]
+print (all_info) #[['Atom', 'Sublime Text'], 'code', ['Python', 'C', 'JavaScript'], ['Guido van Rossum', 'Dennis Ritchie', 'Brendan Eich']]
+print (all_info[0]) #['Atom', 'Sublime Text']
+print (all_info[2]) #['Python', 'C', 'JavaScript']

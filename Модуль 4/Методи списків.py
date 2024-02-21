@@ -9,7 +9,7 @@ print(chars)  # ['a']
 chars = ['a', 'b', 'c']
 last = chars.pop(2) #Повернути i-ий елемент та видалити його зі списку i_element = my_list.pop(i). За замовчуванням i = -1
 print(chars)  # ['a', 'b']
-print(last)  # 'b'
+print(last)  # 'c'
 
 chars = ['a', 'b']
 numbers = [1, 2]
