@@ -1,26 +1,15 @@
-"""
-  Функція генерує всі можливі підсписки заданого списку.
+def all_sub_lists(lst):
+    sub_lists = [[]]
+    # Спочатку додаємо одноелементні підсписки
+    for i in range(len(lst)):
+        sub_lists.append([lst[i]])
+    # Потім додаємо підсписки довші за один елемент
+    for length in range(2, len(lst) + 1):
+        for start in range(len(lst) - length + 1):
+            sub_lists.append(lst[start:start + length])
+    return sub_lists
 
-  Args:
-      data: Список (наприклад, [1, 2, 3]).
+# Перевірка з оновленою логікою
+all_sub_lists(example_list)
 
-  Returns:
-      Список, що містить всі підсписки."""
-def all_sub_lists(data):
-  if len(data) == 0:
-    return [[]]
-  else:
-    result = []
-    for i in range(len(data)):
-      # Додаємо всі підсписки, які починаються з i-го елемента
-      for sublist in all_sub_lists(data[i+1:]):
-        result.append([data[i]] + sublist)
-      # Додаємо порожній список
-      result.append([])
-    return result
-
-# Приклад використання
-data = [4, 6, 1, 3]
-all_sub_lists = all_sub_lists(data)
-print(all_sub_lists)
 
