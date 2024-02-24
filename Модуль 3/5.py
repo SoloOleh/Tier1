@@ -14,3 +14,13 @@ full_name = get_fullname("Oleh", "Solomko")
 print(full_name)  
 full_name = get_fullname("Oleh", "Solomko", "Bohdanovych")
 print(full_name)  
+
+
+# мій варіант не канає
+def get_fullname(first_name, last_name, middle_name=None):
+    if middle_name:
+        return first_name, middle_name, last_name
+    else:
+        return first_name, last_name
+    
+print(get_fullname('Oleh', 'Solo', 'Bohd'))

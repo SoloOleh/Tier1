@@ -1,6 +1,4 @@
-def say_hello(name):
-    print(f'Hello {name}')
+from hello import say_hello
 
 
-print("You imported hello.py")
 say_hello('user')

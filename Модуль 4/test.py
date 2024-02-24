@@ -1,15 +1,8 @@
-section.text
-	global _start
-_start:
-	mov	edx, len
-	mov	ecx, msg
-	mov	ebx, 1
-	mov	eax, 4
-	int	0x80
-	mov	eax, 1
-	int	0x80
+numbers = {
+    1: "one",
+    2: "two",
+    3: "three"
+}
 
-section.data
-
-msg	db	'Hello, World!',0xa
-len	equ	$ - msg
+for fuck in numbers:
+    print(fuck)

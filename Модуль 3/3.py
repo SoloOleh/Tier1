@@ -27,3 +27,14 @@ trip_price = calculate_trip_price(distance_km)
 
 print(f"Вартість поїздки на {distance_km} км складає: {trip_price} грн.")
 print(f"Кількість поїздок: {total_trip}")
+
+base_rate = 40
+price_per_km = 10
+total_trip = 0
+distance_km = int(input('Enter km '))
+def calculate_trip_price(distance_km):
+    global total_trip
+    total_trip = total_trip +1
+    total_price = base_rate + distance_km * price_per_km
+    return total_price
+print (f'total price is {calculate_trip_price(distance_km)}')

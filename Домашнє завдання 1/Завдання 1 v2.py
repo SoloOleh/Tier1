@@ -28,7 +28,7 @@ def get_birthdays_per_week(users):
 
 # Прикладні дані для тестування
 test_users = [
-    {"name": "Alice", "birthday": datetime(1990, 2, 24)},  # Субота цього року
+    {"name": "Alice wonder", "birthday": datetime(1990, 2, 24)},  # Субота цього року
     {"name": "Bob", "birthday": datetime(1985, 2, 20)},    # Середа минулого тижня
     {"name": "Carol", "birthday": datetime(1979, 2, 22)},  # П'ятниця цього тижня
     {"name": "Dave", "birthday": datetime(1992, 2, 25)},   # Понеділок наступного тижня
