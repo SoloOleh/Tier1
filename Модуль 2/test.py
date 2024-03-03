@@ -1,9 +1,11 @@
-while True:
-    num = int(input("Введіть число (0 для виходу): "))
-    if num == 0:
-        break
-    repeat = int(input("Скільки разів помножити число на 2? "))
-    for i in range(repeat):
-        num = num * 2
-    print(num)
-    print (i)
+
+# b = "abcdefg"
+# count = 0
+# for i in b:
+#     count = count + 1
+# print (i)
+
+start = 10
+while start <=20:
+    print (start)
+    start = start + 1
