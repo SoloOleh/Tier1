@@ -5,7 +5,7 @@ def input_error(func):
         except ValueError:
             return "Give me name and phone please."
         except KeyError:
-            return "No such contact found."
+            return "Contact not found."
         except IndexError:
             return "Please provide enough information."
     return inner
@@ -15,11 +15,13 @@ def parse_input(user_input):
     command = command.strip().lower()
     return command, args
 
+@input_error
 def add_contact(args, contacts):
     name, phone = args
     contacts[name] = phone
     return "Contact added."
 
+@input_error
 def change_contact(args, contacts):
     name, new_phone = args
     if name in contacts:
@@ -28,13 +30,15 @@ def change_contact(args, contacts):
     else:
         return "Contact not found."
 
+@input_error
 def show_phone(args, contacts):
     name = args[0]
     if name in contacts:
         return contacts[name]
     else:
-        return "Contact not found."
+        raise KeyError
 
+@input_error
 def show_all(contacts):
     if contacts:
         return '\n'.join([f"{name}: {phone}" for name, phone in contacts.items()])

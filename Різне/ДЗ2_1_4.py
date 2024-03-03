@@ -1,3 +1,15 @@
+def input_error(func):
+    def inner(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except ValueError:
+            return "Give me name and phone please."
+        except KeyError:
+            return "Contact not found."
+        except IndexError:
+            return "Please provide enough information."
+    return inner
+
 def parse_input(user_input):
     command, *args = user_input.split()
     command = command.strip().lower()
@@ -14,14 +26,14 @@ def change_contact(args, contacts):
         contacts[name] = new_phone
         return "Contact updated."
     else:
-        return "Contact not found." 
+        return "Contact not found."
 
 def show_phone(args, contacts):
     name = args[0]
     if name in contacts:
         return contacts[name]
     else:
-        return "Contact not found." 
+        raise KeyError
 
 def show_all(contacts):
     if contacts:
