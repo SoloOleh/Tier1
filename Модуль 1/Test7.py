@@ -16,3 +16,7 @@ del person["вік"]
 # Доступ до елемента
 print(person["ім'я"])  # Олексій
 print(person)
+
+import math
+math.acos
+
