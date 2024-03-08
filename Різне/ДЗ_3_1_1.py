@@ -42,18 +42,18 @@ class Record:
     def add_phone(self, phone):
         self.phones.append(Phone(phone))
 
-    def remove_phone(self, phone):
-        self.phones.remove(phone)
+    # def remove_phone(self, phone): 
+    #     self.phones.remove(phone)
 
-    def edit_phone(self, old_phone, new_phone):
-        found_phone = self.find_phone(old_phone)
-        if found_phone:
-            found_phone.value = new_phone
+    # def edit_phone(self, old_phone, new_phone):
+    #     found_phone = self.find_phone(old_phone)
+    #     if found_phone:
+    #         found_phone.value = new_phone
 
-    def find_phone(self, phone):
-        for p in self.phones:
-            if p.value == phone:
-                return p
+    # def find_phone(self, phone):
+    #     for p in self.phones:
+    #         if p.value == phone:
+    #             return p
 
     def add_birthday(self, birthday):
         self.birthday = Birthday(birthday)
