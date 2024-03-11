@@ -18,3 +18,5 @@ one_line_text = "Textual data in Python is handled with str objects, or strings.
 
 ("spam " "eggs") == "spam eggs"  # True
 
+print(one_line_text)
+

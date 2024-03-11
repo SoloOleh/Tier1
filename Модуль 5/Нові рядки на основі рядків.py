@@ -17,3 +17,6 @@ print('TestHook'.removeprefix('Hook'))   # TestHook
 print('TestHook'.removesuffix('Hook'))   # Test
 print('TestHook'.removesuffix('Test'))   # TestHook
 
+text_2 = 'TestHook'
+text_3 = text_2.removeprefix('Test')
+print(text_3)   # Hook

@@ -1,3 +1,4 @@
-number = int(input("number = "))
-if number < 0:
-    break
+while True:
+    number = int(input("number = "))
+    if number < 0:
+        break
