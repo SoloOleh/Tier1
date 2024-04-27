@@ -8,7 +8,7 @@ def check_palindrome(string):
     char_deque = deque(formatted_string)
     
     # Додаємо символи рядка до черги
-    for char in string:
+    for char in formatted_string:
         char_deque.append(char)
     
     # Порівнюємо символи з обох кінців черги, поки черга не опустіється
