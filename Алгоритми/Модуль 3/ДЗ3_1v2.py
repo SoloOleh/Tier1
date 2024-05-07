@@ -30,5 +30,4 @@ if __name__ == "__main__":
     source_directory = '/path/to/source'  # Змініть на ваш фактичний шлях до вихідної директорії
     destination_directory = '/path/to/destination'  # Змініть на ваш фактичний шлях до директорії призначення
 
-    # Викликаємо функцію копіювання файлів
     copy_files(source_directory, destination_directory)

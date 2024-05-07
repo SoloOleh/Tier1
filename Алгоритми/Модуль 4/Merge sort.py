@@ -33,3 +33,7 @@ def merge(left, right):
         right_index += 1
 
     return merged
+
+numbers = [5, 3, 8, 4, 2]
+sorted_numbers = merge_sort(numbers)
+print(sorted_numbers)

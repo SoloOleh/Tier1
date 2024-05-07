@@ -9,4 +9,5 @@ def insertion_sort(lst):
     return lst
 
 numbers = [5, 3, 8, 4, 2]
-insertion_sort(numbers)
+sorted_numbers = insertion_sort(numbers)
+print(sorted_numbers)

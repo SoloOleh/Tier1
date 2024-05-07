@@ -3,14 +3,9 @@ import shutil
 import sys
 
 def copy_files(source, destination):
-    """
-    Копіює файли з вихідної директорії у цільову, сортуючи їх за розширеннями.
-    """
-    # Створюємо цільову директорію, якщо вона не існує
     if not os.path.exists(destination):
         os.makedirs(destination)
-    
-    # Перебираємо всі файли та директорії в директорії source
+
     for root, dirs, files in os.walk(source):
         for file in files:
             file_path = os.path.join(root, file)
