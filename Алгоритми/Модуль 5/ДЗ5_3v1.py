@@ -1,80 +1,100 @@
 import timeit
 
-# Реалізація алгоритму Бойєра-Мура
-def boyer_moore(pattern, text):
-    ...
+def boyer_moore(text, pattern):
+    def build_shift_table(pattern):
+        table = {}
+        length = len(pattern)
+        for index, char in enumerate(pattern[:-1]):
+            table[char] = length - index - 1
+        table.setdefault(pattern[-1], length)
+        return table
+    
+    shift_table = build_shift_table(pattern)
+    i = 0
+    
+    while i <= len(text) - len(pattern):
+        j = len(pattern) - 1
+        while j >= 0 and text[i + j] == pattern[j]:
+            j -= 1
+        if j < 0:
+            return i
+        i += shift_table.get(text[i + len(pattern) - 1], len(pattern))
+    return -1
 
-# Реалізація алгоритму Кнута-Морріса-Пратта 
-def kmp(pattern, text):
-    ...
+def kmp(main_string, pattern):
+    def compute_lps(pattern):
+        lps = [0] * len(pattern)
+        length = 0
+        i = 1
+        while i < len(pattern):
+            if pattern[i] == pattern[length]:
+                length += 1
+                lps[i] = length
+                i += 1
+            else:
+                if length != 0:
+                    length = lps[length - 1]
+                else:
+                    lps[i] = 0
+                    i += 1
+        return lps
+    
+    lps = compute_lps(pattern)
+    i = j = 0
+    while i < len(main_string):
+        if pattern[j] == main_string[i]:
+            i += 1
+            j += 1
+        if j == len(pattern):
+            return i - j
+        elif i < len(main_string) and pattern[j] != main_string[i]:
+            if j != 0:
+                j = lps[j - 1]
+            else:
+                i += 1
+    return -1
 
-# Реалізація алгоритму Рабіна-Карпа
-def rabin_karp(pattern, text):
-    ...
+def rabin_karp(main_string, substring):
+    def polynomial_hash(s, base=256, modulus=101):
+        n = len(s)
+        hash_value = 0
+        for i, char in enumerate(s):
+            power_of_base = pow(base, n - i - 1, modulus)
+            hash_value = (hash_value + ord(char) * power_of_base) % modulus
+        return hash_value
+    
+    substring_length = len(substring)
+    main_string_length = len(main_string)
+    base = 256
+    modulus = 101
+    substring_hash = polynomial_hash(substring, base, modulus)
+    current_slice_hash = polynomial_hash(main_string[:substring_length], base, modulus)
+    h_multiplier = pow(base, substring_length - 1, modulus)
+    
+    for i in range(main_string_length - substring_length + 1):
+        if substring_hash == current_slice_hash:
+            if main_string[i:i+substring_length] == substring:
+                return i
+        if i < main_string_length - substring_length:
+            current_slice_hash = (current_slice_hash - ord(main_string[i]) * h_multiplier) % modulus
+            current_slice_hash = (current_slice_hash * base + ord(main_string[i + substring_length])) % modulus
+            if current_slice_hash < 0:
+                current_slice_hash += modulus
+    return -1
+
 
 # Зчитування вмісту статей
-with open("стаття 1.txt", "r", encoding="utf-8") as f:
+with open("/Users/solo/Desktop/IT/Repository/Tier1/стаття 1.txt", "r", encoding="iso-8859-1") as f:
     text1 = f.read()
 
-with open("стаття 2.txt", "r", encoding="utf-8") as f:
+with open("/Users/solo/Desktop/IT/Repository/Tier1/стаття 2.txt", "r", encoding="iso-8859-1") as f:
     text2 = f.read()
 
 # Два різних підрядки для пошуку
-pattern1 = "алгоритм"
-pattern2 = "abcdefghijk"
-
-# Виміри часу для статті 1
-print("Стаття 1:")
-print(f"Бойєр-Мур ('{pattern1}'):    ", timeit.timeit(lambda: boyer_moore(pattern1, text1), number=1000))
-print(f"Кнут-Морріс-Пратт ('{pattern1}'):", timeit.timeit(lambda: kmp(pattern1, text1), number=1000))
-print(f"Рабін-Карп ('{pattern1}'):       ", timeit.timeit(lambda: rabin_karp(pattern1, text1), number=1000))
-print(f"Бойєр-Мур ('{pattern2}'):    ", timeit.timeit(lambda: boyer_moore(pattern2, text1), number=1000))
-print(f"Кнут-Морріс-Пратт ('{pattern2}'):", timeit.timeit(lambda: kmp(pattern2, text1), number=1000))
-print(f"Рабін-Карп ('{pattern2}'):       ", timeit.timeit(lambda: rabin_karp(pattern2, text1), number=1000))
-
-# Виміри часу для статті 2
-print("\nСтаття 2:")
-print(f"Бойєр-Мур ('{pattern1}'):    ", timeit.timeit(lambda: boyer_moore(pattern1, text2), number=1000))
-print(f"Кнут-Морріс-Пратт ('{pattern1}'):", timeit.timeit(lambda: kmp(pattern1, text2), number=1000))
-print(f"Рабін-Карп ('{pattern1}'):       ", timeit.timeit(lambda: rabin_karp(pattern1, text2), number=1000))
-print(f"Бойєр-Мур ('{pattern2}'):    ", timeit.timeit(lambda: boyer_moore(pattern2, text2), number=1000))
-print(f"Кнут-Морріс-Пратт ('{pattern2}'):", timeit.timeit(lambda: kmp(pattern2, text2), number=1000))
-print(f"Рабін-Карп ('{pattern2}'):       ", timeit.timeit(lambda: rabin_karp(pattern2, text2), number=1000))
-
-
-Для порівняння ефективності алгоритмів пошуку підрядків Бойєра-Мура, Кнута-Морріса-Пратта та Рабіна-Карпа я виконав наступні дії:
-
-Зчитав вміст двох статей з наданих вами текстових файлів.
-Реалізував функції для кожного з трьох алгоритмів на Python.
-Визначив два різних підрядки: один, що існує в тексті статей ("алгоритм"), і один вигаданий ("abcdefghijk").
-Використовуючи модуль timeit, виміряв час виконання кожного алгоритму для пошуку обох підрядків у кожній статті.
-Порівняв отримані результати для визначення найшвидшого алгоритму для кожної статті та загалом.
-
-Нижче наведено код, який я використовував, отримані результати та висновки:
-pythonCopy codeimport timeit
-
-# Реалізація алгоритму Бойєра-Мура
-def boyer_moore(pattern, text):
-    ...
-
-# Реалізація алгоритму Кнута-Морріса-Пратта 
-def kmp(pattern, text):
-    ...
-
-# Реалізація алгоритму Рабіна-Карпа
-def rabin_karp(pattern, text):
-    ...
-
-# Зчитування вмісту статей
-with open("стаття 1.txt", "r", encoding="utf-8") as f:
-    text1 = f.read()
-
-with open("стаття 2.txt", "r", encoding="utf-8") as f:
-    text2 = f.read()
-
-# Два різних підрядки для пошуку
-pattern1 = "алгоритм"
-pattern2 = "abcdefghijk"
+real = "алгоритм"
+fake = "qwerty"
+pattern1 = real
+pattern2 = fake
 
 # Виміри часу для статті 1
 print("Стаття 1:")
@@ -95,29 +115,27 @@ print(f"Кнут-Морріс-Пратт ('{pattern2}'):", timeit.timeit(lambda:
 print(f"Рабін-Карп ('{pattern2}'):       ", timeit.timeit(lambda: rabin_karp(pattern2, text2), number=1000))
 
 # Результати:
-# Copy codeСтаття 1:
-# Бойєр-Мур ('алгоритм'):     0.0009448480000000232
-# Кнут-Морріс-Пратт ('алгоритм'): 0.0007814409999999973
-# Рабін-Карп ('алгоритм'):        0.003734063
-# Бойєр-Мур ('abcdefghijk'):    0.008990586000000001
-# Кнут-Морріс-Пратт ('abcdefghijk'): 0.008389433000000001
-# Рабін-Карп ('abcdefghijk'):      0.004741769
+# Стаття 1:
+# Бойєр-Мур ('алгоритм'):     0.7348292079987004
+# Кнут-Морріс-Пратт ('алгоритм'): 0.8866600829642266
+# Рабін-Карп ('алгоритм'):        5.200790249975398
+# Бойєр-Мур ('qwerty'):     0.7383884999435395
+# Кнут-Морріс-Пратт ('qwerty'): 0.8892237920081243
+# Рабін-Карп ('qwerty'):        5.2070999999996275
 
-# Стаття 2:
-# Бойєр-Мур ('алгоритм'):     0.0005342629999999981
-# Кнут-Морріс-Пратт ('алгоритм'): 0.0004420399999999982
-# Рабін-Карп ('алгоритм'):        0.0022869269999999997
-# Бойєр-Мур ('abcdefghijk'):    0.004755229000000001
-# Кнут-Морріс-Пратт ('abcdefghijk'): 0.004250035000000001
-# Рабін-Карп ('abcdefghijk'):      0.002532559
+# # Стаття 2:
+# Бойєр-Мур ('алгоритм'):     1.0440726249944419
+# Кнут-Морріс-Пратт ('алгоритм'): 1.284499500063248
+# Рабін-Карп ('алгоритм'):        7.852505458053201
+# Бойєр-Мур ('qwerty'):     1.0395500409649685
+# Кнут-Морріс-Пратт ('qwerty'): 1.2972526249941438
+# Рабін-Карп ('qwerty'):        7.929367499891669
 # Висновки:
 
-# Для статті 1 найшвидшим алгоритмом для підрядка "алгоритм" виявився алгоритм Кнута-Морріса-Пратта, а для підрядка "abcdefghijk" - алгоритм Бойєра-Мура.
-# Для статті 2 алгоритм Кнута-Морріса-Пратта показав найкращі результати для обох підрядків.
-# Загалом, враховуючи обидві статті, алгоритм Кнута-Морріса-Пратта продемонстрував найвищу ефективність для цих вхідних даних.
-# Алгоритм Рабіна-Карпа виявився найповільнішим для всіх випадків, окрім пошуку підрядка "abcdefghijk" у статті 2, де він був лише трохи повільнішим за алгоритм Бойєра-Мура.
+# Для статті 1 найшвидшим алгоритмом для підрядка "алгоритм" виявився алгоритм Бойєра-Мура, а для підрядка "qwerty" також алгоритм Бойєра-Мура.
+# Для статті 2 аналогічні результати. Тому алгоритм Бойєра-Мура продемонстрував найвищу ефективність для цих вхідних даних.
+# Алгоритм Рабіна-Карпа виявився найповільнішим для всіх випадків.
 # Загалом, алгоритми Бойєра-Мура та Кнута-Морріса-Пратта показали порівнянно високу продуктивність для пошуку підрядків у наданих текстах.
-# Отже, для цих конкретних вхідних даних алгоритм Кнута-Морріса-Пратта виявився найбільш ефективним серед розглянутих, хоча алгоритм Бойєра-Мура також продемонстрував високу швидкість у деяких випадках.
 
 # Для зчитування тексту з посиланих файлів з Google Drive, вам потрібно імпортувати та використати сторонній модуль для взаємодії з Google Drive API. Одним з таких модулів є PyDrive.
 # Встановити PyDrive можна через pip:
