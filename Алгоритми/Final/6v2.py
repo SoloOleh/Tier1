@@ -42,6 +42,6 @@ items = {
     "potato": {"cost": 25, "calories": 350}
 }
 
-budget = 90
+budget = 100
 print("Greedy approach:", greedy_algorithm(items, budget))
 print("Dynamic programming approach:", dynamic_programming(items, budget))

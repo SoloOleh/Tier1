@@ -6,6 +6,8 @@ print(current_datetime) # 2020-10-09 22:13:35.053819
 
 from datetime import datetime
 current_datetime = datetime.now()
+datetime.now(future_year)
+print(datetime.now()) # 2020-10-09 22:13:35.053819
 print(current_datetime.year)        # 2020
 print(current_datetime.month)       # 10
 print(current_datetime.day)         # 09

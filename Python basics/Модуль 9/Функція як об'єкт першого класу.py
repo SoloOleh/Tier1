@@ -1,9 +1,9 @@
 def func(x, y):
     return x + y
 
-# func_alias = func
-# result = func_alias(2, 3)
-# print(result)  # 5
+func_alias = func
+result = func_alias(2, 3)
+print(result)  # 5
 
 # def sum_func(x, y):
 #   return x + y

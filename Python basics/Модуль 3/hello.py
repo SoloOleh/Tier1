@@ -3,7 +3,14 @@ def say_hello(name):
 
 
 
-if __name__ == '__main__':
+def main():
     print("You imported hello.py")
     say_hello('user')
+
+if __name__ == '__main__':
+    main()
+
+
+
+
 
